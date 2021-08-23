@@ -1,13 +1,13 @@
 package br.poa.sprenger.fintech;
 
-public abstract class Heap {
+public abstract class Heap<T extends Comparable<T>> {
 
-    protected int v[];
+    protected T v[];
     private int used;
 
     public Heap() {
         used = 0;
-        v = new int[100];
+        v = (T[]) new Object[100];
     }
 
     protected int left(int i) {
@@ -24,7 +24,7 @@ public abstract class Heap {
 
     protected abstract void sift_up(int pos);
 
-    public void put(int data) {
+    public void put(T data) {
         v[used] = data;
         sift_up(used);
         used++;
@@ -36,12 +36,14 @@ public abstract class Heap {
         return pos < used;
     }
 
-    public int get() {
-        int res = v[0];
+    public T get() {
+        T res = v[0];
         v[0] = v[--used];
         sift_down(0);
         return res;
     }
+
+ /* magic print stuff... idk how to make it work with generic types...
 
     private int len(int a) {
         int res = 0;
@@ -79,4 +81,5 @@ public abstract class Heap {
         print(0, 1, 64);
         System.out.println("");
     }
+*/
 }

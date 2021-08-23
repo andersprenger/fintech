@@ -1,14 +1,14 @@
 package br.poa.sprenger.fintech;
 
-public class MaxHeap extends Heap {
+public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
     @Override
     protected void sift_up(int pos) {
         int parentPos = parent(pos);
 
         // if parent is smaller, swap the values...
 
-        if (v[parentPos] < v[pos]) {
-            int aux = v[parentPos];
+        if (v[parentPos].compareTo(v[pos]) < 0) {
+            T aux = v[parentPos];
             v[parentPos] = v[pos];
             v[pos] = aux;
 
@@ -25,18 +25,18 @@ public class MaxHeap extends Heap {
 
         // first, check if one of the children is bigger, updating biggerPos in the case.
 
-        if (isPosValid(leftPos) && v[leftPos] > v[biggerPos]) {
+        if (isPosValid(leftPos) && v[leftPos].compareTo(v[biggerPos]) > 0) {
             biggerPos = leftPos;
         }
 
-        if (isPosValid(rightPos) && v[rightPos] > v[biggerPos]) {
+        if (isPosValid(rightPos) && v[rightPos].compareTo(v[biggerPos]) > 0) {
             biggerPos = rightPos;
         }
 
         // if pos is not equals to the biggerPos, swap the values...
 
         if (pos != biggerPos) {
-            int aux = v[pos];
+            T aux = v[pos];
             v[pos] = v[biggerPos];
             v[biggerPos] = aux;
 
