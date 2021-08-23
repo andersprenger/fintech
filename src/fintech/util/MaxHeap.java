@@ -1,4 +1,4 @@
-package br.poa.sprenger.fintech;
+package fintech.util;
 
 public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
     @Override

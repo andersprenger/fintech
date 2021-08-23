@@ -1,4 +1,4 @@
-package br.poa.sprenger.fintech;
+package fintech.util;
 
 public abstract class Heap<T extends Comparable<T>> {
 
@@ -41,6 +41,14 @@ public abstract class Heap<T extends Comparable<T>> {
         v[0] = v[--used];
         sift_down(0);
         return res;
+    }
+
+    public T peekRoot() {
+        return isPosValid(0) ? v[0] : null;
+    }
+
+    public int size() {
+        return used;
     }
 
  /* magic print stuff... idk how to make it work with generic types...
