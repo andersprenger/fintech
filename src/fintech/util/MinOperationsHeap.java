@@ -1,12 +1,14 @@
 package fintech.util;
 
-public class MinHeap<T extends Comparable<T>> extends Heap<T> {
+import fintech.operations.Operation;
+
+public class MinOperationsHeap extends OperationsHeap {
     @Override
     protected void sift_up(int pos) {
         int parentPos = parent(pos);
 
         if (v[parentPos].compareTo(v[pos]) > 0) {
-            T aux = v[parentPos];
+            Operation aux = v[parentPos];
             v[parentPos] = v[pos];
             v[pos] = aux;
 
@@ -34,7 +36,7 @@ public class MinHeap<T extends Comparable<T>> extends Heap<T> {
         // if pos is not equals to the smallerPos, swap the values...
 
         if (pos != smallerPos) {
-            T aux = v[pos];
+            Operation aux = v[pos];
             v[pos] = v[smallerPos];
             v[smallerPos] = aux;
 

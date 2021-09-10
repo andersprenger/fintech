@@ -1,6 +1,6 @@
 package fintech.operations;
 
-public class Compra implements Comparable<Compra> {
+public class Compra implements Operation {
     private int quantidade, preco;
 
     public Compra(int quantidade, int preco) {
@@ -17,7 +17,7 @@ public class Compra implements Comparable<Compra> {
     }
 
     @Override
-    public int compareTo(Compra o) {
-        return this.preco - o.preco;
+    public int compareTo(Operation o)  {
+        return this.getPreco() - o.getPreco();
     }
 }

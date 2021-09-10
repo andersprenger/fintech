@@ -1,6 +1,8 @@
 package fintech.util;
 
-public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
+import fintech.operations.Operation;
+
+public class MaxOperationsHeap extends OperationsHeap {
     @Override
     protected void sift_up(int pos) {
         int parentPos = parent(pos);
@@ -8,7 +10,7 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
         // if parent is smaller, swap the values...
 
         if (v[parentPos].compareTo(v[pos]) < 0) {
-            T aux = v[parentPos];
+            Operation aux = v[parentPos];
             v[parentPos] = v[pos];
             v[pos] = aux;
 
@@ -36,7 +38,7 @@ public class MaxHeap<T extends Comparable<T>> extends Heap<T> {
         // if pos is not equals to the biggerPos, swap the values...
 
         if (pos != biggerPos) {
-            T aux = v[pos];
+            Operation aux = v[pos];
             v[pos] = v[biggerPos];
             v[biggerPos] = aux;
 

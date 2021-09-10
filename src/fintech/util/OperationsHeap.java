@@ -1,13 +1,15 @@
 package fintech.util;
 
-public abstract class Heap<T extends Comparable<T>> {
+import fintech.operations.Operation;
 
-    protected T v[];
+public abstract class OperationsHeap {
+
+    protected Operation v[];
     private int used;
 
-    public Heap() {
+    public OperationsHeap() {
         used = 0;
-        v = (T[]) new Object[100];
+        v = new Operation[100];
     }
 
     protected int left(int i) {
@@ -24,10 +26,23 @@ public abstract class Heap<T extends Comparable<T>> {
 
     protected abstract void sift_up(int pos);
 
-    public void put(T data) {
+    public void put(Operation data) {
+        if (used == v.length) {
+            increaseArray();
+        }
+
         v[used] = data;
         sift_up(used);
         used++;
+    }
+
+    private void increaseArray() {
+        Operation[] n = new Operation[v.length * 2];
+        System.arraycopy(v, 0, n, 0, v.length);
+
+        v = n;
+
+        Runtime.getRuntime().gc();
     }
 
     protected abstract void sift_down(int pos);
@@ -36,14 +51,14 @@ public abstract class Heap<T extends Comparable<T>> {
         return pos < used;
     }
 
-    public T get() {
-        T res = v[0];
+    public Operation get() {
+        Operation res = v[0];
         v[0] = v[--used];
         sift_down(0);
         return res;
     }
 
-    public T peekRoot() {
+    public Operation peek() {
         return isPosValid(0) ? v[0] : null;
     }
 
