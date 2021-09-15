@@ -8,10 +8,12 @@ public class Venda implements Operation {
         this.preco = preco;
     }
 
+    @Override
     public int getQuantidade() {
         return quantidade;
     }
 
+    @Override
     public int getPreco() {
         return preco;
     }
