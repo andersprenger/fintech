@@ -57,34 +57,37 @@ public class Fintech {
     }
 
     private void trade() {
-        if (compras.peek() == null || vendas.peek() == null) {
+        if (compras.size() == 0 || vendas.size() == 0 ) {
             return;
         }
 
-        else if (compras.peek().getPreco() - vendas.peek().getPreco() >= 0) {
-            Compra c = (Compra) compras.get();
-            Venda v = (Venda) vendas.get();
+        if (compras.peek().getPreco() >= vendas.peek().getPreco()) { // possível fazer compra e venda
 
-            if (c.getQuantidade() > v.getQuantidade()) { // mais compras do que vendas
-                lucro += v.getQuantidade() * c.getPreco() - v.getPreco();
-                acoesNegociadas += v.getQuantidade();
-                compras.put(new Compra(c.getQuantidade() - v.getQuantidade(), c.getPreco()));
+            Compra compra = (Compra) compras.get();
+            Venda venda = (Venda) vendas.get();
+
+            if (compra.getQuantidade() > venda.getQuantidade()) { // mais compras que vendas
+                compras.put(new Compra(compra.getQuantidade() - venda.getQuantidade(), compra.getPreco()));
+
+                lucro += (compra.getPreco() - venda.getPreco()) * venda.getQuantidade();
+                acoesNegociadas += venda.getQuantidade();
             }
 
-            else if (v.getQuantidade() > c.getQuantidade()) { // mais vendas do que compras
-                lucro += c.getQuantidade() * c.getPreco() - v.getPreco();
-                acoesNegociadas += c.getQuantidade();
-                vendas.put(new Venda(c.getQuantidade() - v.getQuantidade(), v.getPreco()));
+            else if (venda.getQuantidade() > compra.getQuantidade()) { // mais vendas que compras
+                vendas.put(new Venda(venda.getQuantidade() - compra.getQuantidade(), venda.getPreco()));
+
+                lucro += (compra.getPreco() - venda.getPreco()) * compra.getQuantidade();
+                acoesNegociadas += compra.getQuantidade();
             }
 
-            else { // numero de vendas eh igual a compras
-                lucro += c.getQuantidade() * c.getPreco() - v.getPreco();
-                acoesNegociadas += c.getQuantidade();
+            else { // mesmo numero de compras e vendas...
+                lucro += (compra.getPreco() - venda.getPreco()) * compra.getQuantidade();
+                acoesNegociadas += compra.getQuantidade();
             }
-        }
 
-        if (compras.peek().getPreco() - vendas.peek().getPreco() > 0) {
-            trade();
+            if (compras.peek().getPreco() >= vendas.peek().getPreco()) { // possível continuar fazendo compra e venda
+                trade();
+            }
         }
     }
 
