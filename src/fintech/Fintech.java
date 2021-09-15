@@ -42,24 +42,15 @@ public class Fintech {
                 if (splitLine[0].equals("C")) {
                     Compra c = new Compra(Integer.parseInt(splitLine[1]), Integer.parseInt(splitLine[2]));
                     compras.put(c);
-                } else if (splitLine[0].equals("V")) {
+                }
+
+                else if (splitLine[0].equals("V")) {
                     Venda v = new Venda(Integer.parseInt(splitLine[1]), Integer.parseInt(splitLine[2]));
                     vendas.put(v);
                 }
 
                 trade();
             }
-
-            while (compras.size() > 0 && vendas.size() > 0) {
-                if (compras.peek() == null || vendas.peek() == null) {
-                    break;
-                } else if ((compras.peek().getPreco() - vendas.peek().getPreco() <= 0)) {
-                    break;
-                } else {
-                    trade();
-                }
-            }
-
         } catch (IOException e) {
             System.err.format("Erro de E/S: %s%n", e);
         }
@@ -68,29 +59,32 @@ public class Fintech {
     private void trade() {
         if (compras.peek() == null || vendas.peek() == null) {
             return;
-        } else if (compras.peek().getPreco() - vendas.peek().getPreco() > 0) {
+        }
+
+        else if (compras.peek().getPreco() - vendas.peek().getPreco() >= 0) {
             Compra c = (Compra) compras.get();
             Venda v = (Venda) vendas.get();
 
-            int diffQuantidade = c.getQuantidade() - v.getQuantidade();
-            int diffPreco = c.getPreco() - v.getPreco();
-
-            if (diffQuantidade > 0) { // mais compras do que vendas
-                lucro += v.getQuantidade() * diffPreco;
+            if (c.getQuantidade() > v.getQuantidade()) { // mais compras do que vendas
+                lucro += v.getQuantidade() * c.getPreco() - v.getPreco();
                 acoesNegociadas += v.getQuantidade();
-                compras.put(new Compra(diffQuantidade, c.getPreco()));
+                compras.put(new Compra(c.getQuantidade() - v.getQuantidade(), c.getPreco()));
             }
 
-            else if (diffQuantidade < 0) { // mais vendas do que compras
-                lucro += c.getQuantidade() * diffPreco;
+            else if (v.getQuantidade() > c.getQuantidade()) { // mais vendas do que compras
+                lucro += c.getQuantidade() * c.getPreco() - v.getPreco();
                 acoesNegociadas += c.getQuantidade();
-                vendas.put(new Venda(-diffQuantidade, v.getPreco()));
+                vendas.put(new Venda(c.getQuantidade() - v.getQuantidade(), v.getPreco()));
             }
 
             else { // numero de vendas eh igual a compras
-                lucro += c.getQuantidade() * diffPreco;
+                lucro += c.getQuantidade() * c.getPreco() - v.getPreco();
                 acoesNegociadas += c.getQuantidade();
             }
+        }
+
+        if (compras.peek().getPreco() - vendas.peek().getPreco() > 0) {
+            trade();
         }
     }
 

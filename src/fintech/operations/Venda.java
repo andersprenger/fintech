@@ -1,6 +1,6 @@
 package fintech.operations;
 
-public class Venda implements Operation{
+public class Venda implements Operation {
     private int quantidade, preco;
 
     public Venda(int quantidade, int preco) {
