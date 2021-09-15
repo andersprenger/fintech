@@ -2,8 +2,8 @@ package fintech;
 
 import fintech.operations.Compra;
 import fintech.operations.Venda;
-import fintech.util.MaxOperationsHeap;
-import fintech.util.MinOperationsHeap;
+import fintech.util.OperationsMaxHeap;
+import fintech.util.OperationsMinHeap;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -12,8 +12,8 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Fintech {
-    private final MaxOperationsHeap compras;
-    private final MinOperationsHeap vendas;
+    private final OperationsMaxHeap compras;
+    private final OperationsMinHeap vendas;
     private int lucro;
     private int acoesNegociadas;
 
@@ -26,8 +26,8 @@ public class Fintech {
     }
 
     public Fintech() {
-        compras = new MaxOperationsHeap();
-        vendas = new MinOperationsHeap();
+        compras = new OperationsMaxHeap();
+        vendas = new OperationsMinHeap();
         lucro = 0;
     }
 

@@ -2,7 +2,7 @@ package fintech.util;
 
 import fintech.operations.Operation;
 
-public class MaxOperationsHeap extends OperationsHeap {
+public class OperationsMaxHeap extends OperationsHeap {
     @Override
     protected void sift_up(int pos) {
         int parentPos = parent(pos);

@@ -2,10 +2,10 @@ package fintech.util;
 
 import java.util.Scanner;
 
-public class MaxIntegerHeap {
+public class IntegerMaxHeap {
 
     public static void main( String[] args ) {
-        MaxIntegerHeap H = new MaxIntegerHeap();
+        IntegerMaxHeap H = new IntegerMaxHeap();
 
         Scanner input = new Scanner( System.in );
 
@@ -23,7 +23,7 @@ public class MaxIntegerHeap {
     protected Integer v[];
     private int used;
 
-    public MaxIntegerHeap() {
+    public IntegerMaxHeap() {
         used = 0;
         v = new Integer[100];
     }
