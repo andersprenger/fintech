@@ -76,8 +76,6 @@ public class IntegerMaxHeap {
             biggerPos = rightPos;
         }
 
-        // if pos is not equals to the biggerPos, swap the values...
-
         if (pos != biggerPos) {
             Integer aux = v[pos];
             v[pos] = v[biggerPos];
@@ -106,7 +104,8 @@ public class IntegerMaxHeap {
         return used;
     }
 
- /* magic print stuff... idk how to make it work with generic types... */
+    // magic print stuff below... idk how to make it work with generic types...
+    // you can just delete/comment everything below...
 
     private int len(int a) {
         int res = 0;
@@ -144,5 +143,4 @@ public class IntegerMaxHeap {
         print(0, 1, 64);
         System.out.println("");
     }
-//*/
 }

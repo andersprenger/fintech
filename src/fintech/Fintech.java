@@ -14,15 +14,18 @@ import java.util.Scanner;
 public class Fintech {
     private final OperationsMaxHeap compras;
     private final OperationsMinHeap vendas;
-    private int lucro;
-    private int acoesNegociadas;
+    private long lucro;
+    private long acoesNegociadas;
 
     public static void main(String[] args) {
         Fintech fintech = new Fintech();
         Scanner s = new Scanner(System.in);
         String p = s.next();
+        long t0 = System.currentTimeMillis();
         fintech.run(p.contains(".txt") ? p : p + ".txt");
+        long t1 = System.currentTimeMillis();
         System.out.println(fintech);
+        System.out.println("Tempo de execução: " + (t1 - t0) + "ms");
     }
 
     public Fintech() {
